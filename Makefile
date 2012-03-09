@@ -9,10 +9,10 @@ default : ./node_modules $(BUILDS) less
 clean : 
 	rm -rf ./node_modules
 	rm -rf ./build
+	rm -rf ./less
 	rm static/js/bootstrap.js
 	rm static/img/glyphicons*png
 	rm static/css/bootstrap.css
-	rm less/css/*
 
 ./node_modules :
 	mkdir ./node_modules
@@ -25,6 +25,8 @@ clean :
 	git clone git://github.com/twitter/bootstrap.git build/bootstrap
 	cp build/bootstrap/img/* static/img
 	cat build/bootstrap/js/*js > static/js/bootstrap.js
+	mkdir less
+	mkdir less/css
 	cp build/bootstrap/less/*less less/css
 
 less : ./build/bootstrap
