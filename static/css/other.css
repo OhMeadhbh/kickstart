@@ -1,10 +1,20 @@
 body {
-  padding-top: 60px;
-  overflow-y: scroll;
+    padding-top: 60px;
+    overflow-y: scroll;
+}
+
+p {
+    margin-top: .25em;
+}
+
+dt {
+    font-size: 18px;
+    margin-top: .25em;
+    margin-bottom: .75em;
 }
 
 .front {
     text-align: justify;
     text-justify: inter-word;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.25em;
 }
