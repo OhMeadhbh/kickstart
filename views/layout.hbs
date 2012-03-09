@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{title}} : {{subtitle}}">
+    <meta name="author" content="Meadhbh S. Hamrick">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/other.css">
+    {{#if session}}<link rel="session" data="{{session}}">{{/if}}
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">{{title}}</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="/about">about</a></li>
+              <li><a href="/register">register</a></li>
+            </ul>
+	    <p class="navbar-text pull-right"><a href="/login">login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{{body}}}
+
+    <div class="container">
+      <div class="row-fluid">
+	<div class="span11">
+	  <div class="footer offset1">
+	    <p class="pagination-centered">{{copy}}</p>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>    
+  </body>
+</html>

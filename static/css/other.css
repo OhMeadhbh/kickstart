@@ -1,0 +1,10 @@
+body {
+  padding-top: 60px;
+  overflow-y: scroll;
+}
+
+.front {
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 1.5em;
+}

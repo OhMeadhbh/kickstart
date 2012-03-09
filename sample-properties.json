@@ -1,0 +1,29 @@
+{
+  "publicUrl": "http://sl8.us:2112/",
+  "errorHandler": {
+    "dumpExceptions": true,
+    "showStack": true
+  },
+  "faviconPath": "static/favicon.ico",
+  "compiler": {
+    "enable": [ "less" ],
+    "src": "/home/msh/Projects/bootstrap-play/less",
+    "dest": "/home/msh/Projects/bootstrap-play/static"
+  },
+  "logPath": "access_log",
+  "staticPath": "static",
+  "views": {
+    "path": "views",
+    "engine": "hbs"
+  },
+  "listen": {
+    "port": 2112,
+    "host": "sl8.us"
+  },
+  "site": {
+    "info": "/api/site.info",
+    "title": "Kickstart",
+    "subtitle": "Because It Sux To Do The Same Thing Over And Over",
+    "copy": "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved"
+  }
+}
