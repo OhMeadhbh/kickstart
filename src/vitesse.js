@@ -6,6 +6,7 @@
     var webid   = require( './webid' );
 
     var log     = function (m) {};
+    var dao;
 
     if( module && module.exports ) {
 	module.exports.createServer = function ( properties ) {
@@ -16,6 +17,7 @@
     function vitesse( properties ) {
 	if( properties && properties.log ) {
 	    log = properties.log;
+	    dao = properties.dao;
 	}
     }
 
@@ -93,25 +95,20 @@
 	    '/about/javascript' : 'about_javascript',
 	    '/about/tou' : 'about_tou',
 	    '/about/privacy' : 'about_privacy',
-	    '/register' : 'register',
-	    '/login' : 'login',
-	    '/logout' : 'logout',
 	    '/app' : 'app'
 	};
 
 	function stockHandler ( template ) {
-	    return function( request, response ) {
-		response.render( template, stockProperties( request.webid ) );
-	    };
-	}
-
-	function stockProperties ( webid ) {
-	    return( {
-		    title: properties.site.title,
-		    subtitle: properties.site.subtitle,
-		    copy: properties.site.copy,
-		    session: webid
+	    return function ( request, response ) {
+		dao.getSiteInfo( function ( err, data ) {
+		    response.render( template, {
+			title: data.title,
+			subtitle: data.subtitle,
+			copy: data.copy,
+			session: request.webid
+		    } );
 		} );
+	    }
 	}
 
 	for( var endpoint in stockEndpoints ) {

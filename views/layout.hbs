@@ -7,10 +7,14 @@
     <meta name="description" content="{{title}} : {{subtitle}}">
     <meta name="author" content="Meadhbh S. Hamrick">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/touch-icon-iphone4.png">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/other.css">
     {{#if session}}<link rel="session" data="{{session}}">{{/if}}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>    
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,19 +23,10 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/">{{title}}</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><a href="/about">about</a></li>
-              <li><a href="/register">register</a></li>
-            </ul>
-	    <p class="navbar-text pull-right"><a href="/login">login</a></p>
-          </div>
+	  <a class="brand" href="/">kickstart</a>
+	  <ul class="nav pull-right">
+	    <li><a href="/about">about this site</a></li>
+	  </ul>
         </div>
       </div>
     </div>
@@ -48,8 +43,5 @@
       </div>
     </div>
 
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>    
   </body>
 </html>

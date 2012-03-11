@@ -1,49 +1,59 @@
+<script type="text/javascript" src="/js/home.js"></script>
+
+
+</div>
 <div class="container">
-  <div class="row-fluid">
-    <div class="span11">
-      <div class="hero-unit offset1">
-	<h1 class="pagination-centered">{{title}}</h1>
-	<br/>
-	<h2 class="pagination-centered">{{subtitle}}</h2>
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+	<div class="span8">
+	  <div class="front-welcome">
+	    <div class="bottom-text">
+	      <h1 class="pagination-left grey-text">{{title}}</h1>
+	      <h3 class="pagination-left grey-text">{{subtitle}}</h3>
+	    </div>
+	  </div>
+	</div>
+	<div class="span4">
+	    <div class="front-local">
+	      <input placeholder="Email" type="text" class="text-input text-email" id="email_local">
+	      <input placeholder="Password" type="password" class="text-input text-password" id="password_local">
+	      <a class="btn button-login" id="login_local">login</a><br/>
+	      <a href="#" class="recovery" id="recovery_local">i forgot my password</a>
+	    </div>
+	    <div class="front-social" >
+	      <a class="btn social twit" id="twitter_social">
+		<img src="/img/sign-in-with-twitter-l-sm.png">
+	      </a>
+	      <a class="btn social fb" id="facebook_social">
+		<img src="/img/fbc.jpg">
+	      </a>
+	    </div>
+	    <div class="front-provision">
+	      <span class="login-text">need an account?</span>
+	      <input placeholder="Full name" type="text" class="text-input text-email" id="name_provision">
+	      <input placeholder="Email" type="text" class="text-input text-email" id="email_provision">
+	      <input placeholder="Password" type="password" class="text-input text-password" id="password_provision">
+	      <a class="btn button-login" id="signup_provision">sign-up</a><br/>
+	    </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="span11">
-      <div class="hero-unit offset1">
-	<p class="front">
-	  {{title}} is a sample <a href="http://nodejs.org">node.js</a>
-	  application. It demonstrates how to setup a typical web service
-	  using node's built-in services and several popular packages.
-	</p>
-
-	<p class="front">
-	  By itself it does very little; but by adding your own code to
-	  the {{title}} application, you can make it do what you want.
-	  Documentation is part of the
-	  <a href="https://github.com/OhMeadhbh/kickstart">source
-	  distribution at Github</a>.
-	</p>
-
-	<p class="front">
-	  {{title}} is preconfigured to allow logins from Twitter&reg; and
-	  Facebook&reg;. Visit the <a href="/register">registration page</a>
-	  to setup a new account or the <a href="/login">login page</a> if
-	  you've already registered.
-	</p>
-
-	<noscript>
+<noscript>
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+	<div class="hero-unit">
 	  <p class="front">
 	    Before you can use {{title}}, you'll have to make sure
 	    JavaScript is enabled. Visit the
 	    <a href="/about/javascript">javascript section</a> in our
 	    online help system to see how to do this.
 	  </p>
-	</noscript>
+	</div>
       </div>
     </div>
   </div>
-</div>
+</noscript>
