@@ -3,10 +3,11 @@
     var props   = require( 'node-props' );
     var mug     = require( 'node-mug' );
     var express = require( 'express' );
-    var webid   = require( './webid' );
+    var crypto  = require( 'crypto' );
 
     var log     = function (m) {};
     var dao;
+    var generator;
 
     if( module && module.exports ) {
 	module.exports.createServer = function ( properties ) {
@@ -36,7 +37,7 @@
 	function init_mug () {
 	    mug.createInstance( function( g ) {
 		    log( "initialized UUID generator" );
-		    that.generator = g;
+		    generator = g;
 
 		    init_express();
 		} );
@@ -54,7 +55,6 @@
 	    defaults.logPath && app.use( express.logger( {stream: fs.createWriteStream( defaults.logPath )} ) );
 	    defaults.staticPath && app.use( express.static( defaults.staticPath ) );
 	    app.use( express.cookieParser() );
-	    app.use( webid( that.generator ) );
 	    app.use( express.bodyParser() );
 	    app.use( app.router );
 
@@ -105,7 +105,7 @@
 			title: data.title,
 			subtitle: data.subtitle,
 			copy: data.copy,
-			session: request.webid
+			session: request.cookies[ 'webid' ]
 		    } );
 		} );
 	    }
@@ -116,5 +116,94 @@
 	    app.get( endpoint, stockHandler( template ) );
 	}
     };
+
+    vitesse.prototype.addStockApiEndpoints = function( properties, app ) {
+	app.post( '/api/login.local', login_local );
+	app.get( '/api/login.twitter', _unimplemented() );
+	app.get( '/api/callback.twitter', _unimplemented() );
+	app.post( '/api/logout', _unimplemented() );
+    };
+
+    function _unimplemented () {
+	return function ( request, response ) {
+	    log( "unimplemented" );
+	    var data = JSON.stringify( {success:false,error:'call unimplemented'} );
+	    response.writeHead( 200, {'Content-Type': 'application/json', 'Content-Length': data.length} );
+	    response.end( data );
+	};
+    }
+
+    function login_local ( request, response ) {
+	var response_object = {
+	    success: false,
+	    errno: 1,
+	    error: 'Username or Password Invalid'
+	};
+	var syndrome;
+	var id_record;
+
+	if( request.body && request.body.email && request.body.passwd ) {
+	    dao.getEmailIdentity( request.body.email, postGetEmailIdentity );
+	} else {
+	    return complete();
+	}
+
+	function postGetEmailIdentity( error, data ) {
+	    if( error ) {
+		return complete();
+	    } else {
+		var salt = new Buffer( data.password.salt, 'base64' );
+		syndrome = data.password.syndrome;
+		id_record = data;
+		crypto.pbkdf2( request.body.passwd, salt, data.password.count, 20, postKeyGen );
+	    }
+	}
+
+	function postKeyGen( err, derivedKey ) {
+	    if( err ) {
+		return complete();
+	    } else {
+		var e = new Buffer( 20 );
+		for( var i = 0; i < 20; i++ ) {
+		    e[i] = derivedKey.charCodeAt( i );
+		}
+		var d = e.toString( 'base64' );
+		if( d === syndrome ) {
+		    generator.generate( createSession );
+		} else {
+		    return complete();
+		}
+	    }
+	}
+
+	function createSession ( uuid ) {
+	    dao.createSession( { id: uuid.toString(), user: id_record.user }, function ( err ) {
+		    if( err ) {
+			response_object = {
+			    success: false,
+			    errno: 3,
+			    error: 'Database Error'
+			};
+			return complete();
+		    } else {
+			successLogin( uuid );
+		    }
+		} );
+	}
+
+	function successLogin ( uuid ) {
+	    response_object = {
+		success: true,
+		webid: uuid.toString()
+	    };
+	    dao.dumpSessions();
+	    return complete();
+	}
+
+	function complete () {
+	    response.writeHead( 200, { 'Content-Type': 'application/json' } );
+	    response.end( JSON.stringify( response_object ) );
+	}
+    }
 
 } ) ();

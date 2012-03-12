@@ -7,6 +7,10 @@
 	module.exports = dao;
     }
 
+    dao.prototype.dumpSessions = function () {
+	console.log( JSON.stringify( sessions ) );
+    };
+
     dao.prototype.init = function ( complete ) {	
 	(_safe_function(complete))(null);
     }
@@ -35,7 +39,12 @@
 	'OhMeadhbh@gmail.com': {
 	    user : 'faf60e8d-26e6-4469-8467-e42276cde9b8',
 	    id: 'OhMeadhbh@gmail.com',
-	    name: 'Meadhbh Hamrick'
+	    name: 'Meadhbh Hamrick',
+	    password: {
+		salt: 'zpAtI1MlHUM=',
+		count: 1024,
+		syndrome: 'FudmjBs+B5a/2IlK2UKbGOM4YwU='
+	    }
 	}
     }
 
@@ -43,11 +52,6 @@
 	'faf60e8d-26e6-4469-8467-e42276cde9b8': {
 	    id: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
 	    name: 'Meadhbh S. Hamrick',
-	    password: {
-		salt: 'zpAtI1MlHUM=',
-		count: 1024,
-		syndrome: 'FudmjBs+B5a/2IlK2UKbGOM4YwU='
-	    },
 	    dob: '01 Jan, 1970',
 	    twitter_ids: ['OhMeadhbh', 'elviscosity'],
 	    email_ids: ['OhMeadhbh@gmail.com'],

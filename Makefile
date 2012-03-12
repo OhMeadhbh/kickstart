@@ -1,6 +1,6 @@
 # Makefile
 
-MODULES = node-props node-mug less hbs express
+MODULES = node-props node-mug less hbs express emailjs
 
 BUILDS = ./build/bootstrap
 
