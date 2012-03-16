@@ -1,6 +1,6 @@
 # Makefile
 
-MODULES = node-props node-mug less hbs express emailjs
+MODULES = node-props node-mug less hbs express emailjs oauth
 
 BUILDS = ./build/bootstrap
 
@@ -19,13 +19,16 @@ BOOTSTRAPJS = \
 	build/bootstrap/js/bootstrap-typeahead.js
 
 
-default : ./node_modules $(BUILDS) static/css/bootstrap.css
+default : ./node_modules $(BUILDS) static/css/bootstrap.css static/js/underscore-min.js static/js/backbone-min.js static/js/handlebars-1.0.0.beta.6.js
 
 clean : 
 	rm -rf ./node_modules
 	rm -rf ./build
 	rm -rf ./less
 	rm static/js/bootstrap.js
+	rm static/js/underscore-min.js
+	rm static/js/backbone-min.js
+	rm static/js/handlebars-1.0.0.beta.6.js
 	rm static/img/glyphicons*png
 	rm static/css/bootstrap.css
 
@@ -46,3 +49,12 @@ clean :
 
 static/css/bootstrap.css :
 	node_modules/less/bin/lessc less/css/bootstrap.less static/css/bootstrap.css
+
+static/js/underscore-min.js :
+	wget -O static/js/underscore-min.js http://documentcloud.github.com/underscore/underscore-min.js
+
+static/js/backbone-min.js :
+	wget -O static/js/backbone-min.js http://documentcloud.github.com/backbone/backbone-min.js
+
+static/js/handlebars-1.0.0.beta.6.js :
+	wget -O static/js/handlebars-1.0.0.beta.6.js https://github.com/downloads/wycats/handlebars.js/handlebars-1.0.0.beta.6.js

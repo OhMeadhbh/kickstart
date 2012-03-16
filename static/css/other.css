@@ -142,3 +142,70 @@ dt {
    background-color: white;
    text-align: center;
 }
+
+.message-unit {
+  padding: 4px;
+  margin-bottom: 30px;
+  background-color: #f5f5f5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #e1e1e8;
+}
+
+.folder-list {
+    height: 790px;
+}
+
+.message-list {
+    overflow-y: scroll;
+    height: 240px;
+}
+
+.message-body {
+    height: 540px;
+}
+
+.col-message {
+    width: 46px;
+    border-right: 1px solid #e1e1e8;
+    text-align: center;
+}
+
+.col-from {
+    width: 160px;
+    border-right: 1px solid #e1e1e8;
+}
+
+.col-to {
+    width: 160px;
+    border-right: 1px solid #e1e1e8;
+}
+
+.col-topic {
+}
+
+.col-body {
+    width: 60px;
+    border-right: 1px solid #e1e1e8;
+}
+
+.msg-message {
+    align-text: center;
+}
+
+.icon-transparent {
+    opacity: 0.15;
+    filter:alpha(opacity=15);
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+.text-body {
+    margin: 0px;
+    width: 98%;
+    height: 400px;
+    resize: none;
+}

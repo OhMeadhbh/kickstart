@@ -7,10 +7,6 @@
 	module.exports = dao;
     }
 
-    dao.prototype.dumpSessions = function () {
-	console.log( JSON.stringify( sessions ) );
-    };
-
     dao.prototype.init = function ( complete ) {	
 	(_safe_function(complete))(null);
     }
@@ -27,11 +23,6 @@
 	    id: 'OhMeadhbh',
 	    user: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
 	    name: 'Meadhbh Hamrick'
-	},
-	'elviscosity': {
-	    id: 'elviscosity',
-	    user: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
-	    name: 'Elvis Marlowe'
 	}
     };
 

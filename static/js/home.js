@@ -84,7 +84,7 @@ $(document).ready( function ( ) {
 	console.log( 'home.prototype.recovery_local' );
     };
     home.prototype.twitter_social = function () {
-	console.log( 'home.prototype.twitter_social' );
+	location.href = "/api/login.twitter";
     };
     home.prototype.facebook_social = function () {
 	console.log( 'home.prototype.facebook_social' );

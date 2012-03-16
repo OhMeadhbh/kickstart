@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{title}} : {{subtitle}}">
+    <meta name="author" content="Meadhbh S. Hamrick">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/touch-icon-iphone4.png">
+    {{#if session}}<link rel="session" id="session" data="{{session}}">{{/if}}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+$(document).ready( function () {
+  var e = $('#session').attr( 'data' );
+  if( e ) {
+    location.href = "/app";
+  } else {
+    location.href = "/start";
+  }
+} );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <noscript>
+      <p>
+	Hi, welcome to {{title}}. This site demonstrates a skeletal
+	web application based on <a href="http://nodejs.org">node.js</a>,
+	<a href="http://documentcloud.github.com/backbone/">backbone.js</a>,
+	and <a href="http://twitter.github.com/bootstrap/">bootstrap</a>.
+	It's intended mostly for software developers, who are
+	encouraged to visit it's GIT Repository at
+	<a href="https://github.com/OhMeadhbh/kickstart">https://github.com/OhMeadhbh/kickstart</a>,
+	where they candownload the source code for this web application and
+	extend it to meet their specific needs.
+      </p>
+      <p>If you want to continue, you'll have to have
+	JavaScript enabled. Please feel free to visit our
+	<a href="/about/javascript">activating JavaScript</a> page for more
+	info.
+      </p>
+
+    </noscript>
+  </body>
+</html>

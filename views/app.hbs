@@ -1,12 +1,137 @@
-    <div class="container">
+<div class="container">
+  <div class="row">
+    <div class="span12">
       <div class="row">
-	<div class="span11">
-	  <div class="hero-unit offset1">
-	    <p class="front">
-	      w00t!
-	    </p>
+	<div class="span3">
+	  <div class="well sidebar-nav folder-list">
+            <ul class="nav nav-list">
+              <li class="nav-header">Message Folders</li>
+              <li class="active"><a href="#messages/inbox">INBOX</a>
+		<ul class="nav nav-list">
+		  <li><a href="#messages/inbox/Unread">Unread</a></li>
+		  <li><a href="#messages/inbox/Folder%201">Folder 1</a></li>
+		  <li><a href="#messages/inbox/Folder%202">Folder 2</a></li>
+		  <li><a href="#messages/inbox/Trash">Trash</a></li>
+		</ul>
+	      </li>
+              <li><a href="#">SENT</a>
+		<ul class="nav nav-list">
+		  <li><a href="#messages/sent/Trash">Trash</a></li>
+		</ul>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+	<div class="span9">
+	  <div class="message-unit message-list">
+	    <table class="table table-striped table-condensed">
+	      <tr>
+		<th class="col-message">&nbsp;</th>
+		<th class="col-from">from</th>
+		<th class="col-to">to</th>
+		<th class="col-topic">topic</th>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Admiral Akbar</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Traps</td>
+	      </tr>
+	      <tr>
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope icon-transparent"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Minch Yoda</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Anger Management</td>
+	      </tr>
+	      <tr>
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope icon-transparent"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Aron Stumbaugh</td>
+		<td>Homework</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Bob Balaban</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Abuse</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Self-Harm</td>
+	      </tr>
+	      <tr>
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope icon-transparent"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Aron Stumbaugh</td>
+		<td>Homework</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Bob Balaban</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Abuse</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Self-Harm</td>
+	      </tr>
+	      <tr>
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope icon-transparent"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Aron Stumbaugh</td>
+		<td>Homework</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Bob Balaban</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Abuse</td>
+	      </tr>
+	      <tr class="bolded">
+		<td><i class="icon-check icon-transparent"></i><i class="icon-envelope"></i><i class="icon-star-empty icon-transparent"></i></td>
+		<td>Janet Kowalski</td>
+		<td>Meadhbh Hamrick</td>
+		<td>Self-Harm</td>
+	      </tr>
+
+	    </table>
+	  </div>
+	  <div class="message-unit message-body">
+	    <table class="table table-striped">
+	      <tr>
+		<th class="col-body">from</th>
+		<td>Minch Yoda</td>
+	      </tr>
+	      <tr>
+		<th class="col-body">to</th>
+		<td>Meadhbh Hamrick</td>
+	      </tr>
+	      <tr>
+		<th class="col-body">topic</th>
+		<td>Anger Management</td>
+	      </tr>
+	    </table>
+	    <textarea class="text-body">Yo Meadhbh,
+I noticed you were getting pretty angry the other day. Maybe you should try some camomile tea. I think it would help a lot.
+
+I don't talk about this much, but I know first-hand the pain of losing someone to anger. Ask me about my former padawan someday. It's a sad story, but the moral is: anger, the path to a happy life it is not.
+
+-Cheers
+-Master Y</textarea>
 	  </div>
 	</div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="/js/underscore-min.js"></script>
+<script type="text/javascript" src="/js/backbone-min.js"></script>
+<script type="text/javascript" src="/js/handlebars-1.0.0.beta.6.js"></script>
+<script type="text/javascript" src="/js/app.js"></script>
 
