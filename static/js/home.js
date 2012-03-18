@@ -89,8 +89,37 @@ $(document).ready( function ( ) {
     home.prototype.facebook_social = function () {
 	console.log( 'home.prototype.facebook_social' );
     };
+
     home.prototype.signup_provision = function () {
 	console.log( 'home.prototype.signup_provision' );
+	$.ajax({
+	    url: '/api/provision.local',
+		    async: true,
+	    contentType: 'application/json',
+	    data: JSON.stringify( {
+	    	name: this.name_provision.val(),
+	        email: this.email_provision.val(),
+	        passwd: this.password_provision.val() } ),
+	    dataType: 'json',
+	    type: 'POST',
+	    success: success,
+		    error: error,
+		    headers: {'X-webid': webid.uuid }
+	});
+
+		function success (data, textStatus, jqXHR ) {
+	    	if( data && data.success ) {
+	    		location.href = '/mail/signup';
+	    	} else {
+	    		_raise_alert( '(application error) ' + _error( data ) );
+	    	}
+		}
+
+	function error ( jqXHR, textStatus, errorThrown ) {
+	    console.log( 'error' );
+	    _raise_alert( '(' + textStatus + ') ' + errorThrown );
+	}
+
     };
 
     //todo: add proper error handling w/ alerts and so forth

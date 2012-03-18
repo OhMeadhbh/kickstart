@@ -1,62 +1,64 @@
 (function(){
-    function dao ( options ) {
-	this.options = options;
+	function dao ( options ) {
+		this.options = options;
     }
 
     if( module && module.exports ) {
-	module.exports = dao;
+    	module.exports = dao;
     }
 
     dao.prototype.init = function ( complete ) {	
-	(_safe_function(complete))(null);
-    }
+    	(_safe_function(complete))(null);
+    };
 
     var site_info = {
-	login: "/api/login.local",
-	title: "kickstart",
-	subtitle: "'cause it sux to keep doing the same thing over and over",
-	copy: "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved"
+    	login: "/api/login.local",
+    	title: "kickstart",
+    	subtitle: "'cause it sux to keep doing the same thing over and over",
+    	copy: "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved"
     };
 
     var twitter_ids = {
-	'OhMeadhbh': {
-	    id: 'OhMeadhbh',
-	    user: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
-	    name: 'Meadhbh Hamrick'
-	}
+    	'OhMeadhbh': {
+    		id: 'OhMeadhbh',
+    		user: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
+    		name: 'Meadhbh Hamrick'
+    	}
     };
 
     var email_ids = {
-	'OhMeadhbh@gmail.com': {
-	    user : 'faf60e8d-26e6-4469-8467-e42276cde9b8',
-	    id: 'OhMeadhbh@gmail.com',
-	    name: 'Meadhbh Hamrick',
-	    password: {
-		salt: 'zpAtI1MlHUM=',
-		count: 1024,
-		syndrome: 'FudmjBs+B5a/2IlK2UKbGOM4YwU='
-	    }
-	}
-    }
+    	'OhMeadhbh@gmail.com': {
+    		user : 'faf60e8d-26e6-4469-8467-e42276cde9b8',
+    		id: 'OhMeadhbh@gmail.com',
+    		name: 'Meadhbh Hamrick',
+    		password: {
+    			count: 1024,
+    	    	salt: 'zpAtI1MlHUM=',
+    	    	secret: 'SGLe9dKeiHFujEyVPyUZEP2n+KM='
+    		}
+    	}
+    };
 
     var users = {
-	'faf60e8d-26e6-4469-8467-e42276cde9b8': {
-	    id: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
-	    name: 'Meadhbh S. Hamrick',
-	    dob: '01 Jan, 1970',
-	    twitter_ids: ['OhMeadhbh', 'elviscosity'],
-	    email_ids: ['OhMeadhbh@gmail.com'],
-	    tos_accepted: '01 Jan, 1970'
-	}
+    	'faf60e8d-26e6-4469-8467-e42276cde9b8': {
+    		id: 'faf60e8d-26e6-4469-8467-e42276cde9b8',
+    		name: 'Meadhbh S. Hamrick',
+    		dob: '01 Jan, 1970',
+    		twitter_ids: ['OhMeadhbh' ],
+    		email_ids: ['OhMeadhbh@gmail.com'],
+    		tos_accepted: '01 Jan, 1970'
+    	}
     };
 
     var tos = {
-	changed: '01 Jan, 2012',
-	text: 'this is the terms of service.'
+    	changed: '01 Jan, 2012',
+    	text: 'this is the terms of service.'
     };
 
     var sessions = {};
 
+    var mail_queue = {};
+    
     function _safe_function ( f ) {
 	if( 'function' === typeof f ) {
 	    return f;
@@ -77,7 +79,7 @@
 	    } catch ( e ) {
 		safe( e.toString(), null );
 	    }
-	}
+	};
     }
 
     function _create( collection ) {
@@ -93,7 +95,7 @@
 	    } else {
 		safe( 'no id' );
 	    }
-	}
+	};
     }
 
     function _put( collection ) {
@@ -109,7 +111,7 @@
 	    } else {
 		safe( 'no id' );
 	    }
-	}
+	};
     }
 
     function _delete( collection ) {
@@ -125,7 +127,7 @@
 	    } else {
 		safe( 'no id' );
 	    }
-	}
+	};
     }
 
     function _build_accessors ( collection, name ) {
@@ -139,6 +141,7 @@
     _build_accessors( users, 'User' );
     _build_accessors( twitter_ids, 'TwitterIdentity' );
     _build_accessors( email_ids, 'EmailIdentity' );
+    _build_accessors( mail_queue, 'MailQueue' );
 
     dao.prototype.getTos = function ( complete ) {
 	(_safe_function(complete))(null,{changed:new Date(tos.changed),text:tos.text});
@@ -157,5 +160,17 @@
 	} else {
 	    safe( 'no tos' );
 	}
+    };
+    
+    dao.prototype.dumpTwitterIds = function () {
+    	console.log( twitter_ids );
+    };
+    
+    dao.prototype.dumpUsers = function () {
+    	console.log( users );
+    };
+    
+    dao.prototype.dumpSessions = function () {
+    	console.log( sessions );
     };
 })();
