@@ -531,8 +531,8 @@
     	function goart_post_create_session ( err, data ) {
     		return _wrap_error( request, response, err, function () {
     			var cookie_opts = {
-        			expires: new Date( Date.now() + 86400000 ),
-        			path: '/'
+			    path: '/',
+			    domain: 'kickstart.meadhbh.org'
         		} ;
         		response.cookie( 'webid', uuid.toString(), cookie_opts );
         		response.redirect( 'https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token );    			
