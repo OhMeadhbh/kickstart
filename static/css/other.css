@@ -20,10 +20,8 @@ dt {
 }
 
 .login-text {
-    margin-bottom: 1.25em;
     font-size: 18px;
     margin: 0px;
-    line-height: 8px;
 }
 
 .nav-home-logo {
@@ -78,7 +76,7 @@ dt {
 .front-welcome {
     position: relative;
     display: block;
-    height: 440px;
+    height: 453px;
     background-image:url('/img/fire.jpg');
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -87,9 +85,8 @@ dt {
 
 .front-local {
     padding: 13px;
-    margin-bottom: 30px;
-//    background-color: #F5F5F5;
-    background-color: rgba(247, 148, 6, 0.5);
+    margin-bottom: 20px;
+    background-color: #FCCA83;
     height: 96px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -99,9 +96,8 @@ dt {
 
 .front-social {
     padding: 13px;
-    margin-bottom: 30px;
-//    background-color: #F5F5F5;
-    background-color: rgba(247, 148, 6, 0.5);
+    margin-bottom: 20px;
+    background-color: #FCCA83;
     height: 76px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -109,11 +105,10 @@ dt {
 }
 
 .front-provision {
-    padding: 13px;
+    padding: 0px 13px 13px 13px;
     margin-bottom: 30px;
-//    background-color: #F5F5F5;
-    background-color: rgba(247, 148, 6, 0.5);
-    height: 130px;
+    background-color: #FCCA83;
+    height: 176px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -208,4 +203,16 @@ dt {
     width: 98%;
     height: 400px;
     resize: none;
+}
+
+.front-alert-area {
+    margin-bottom: 20px;
+    height: 36px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.hidden {
+    visibility: hidden;
 }

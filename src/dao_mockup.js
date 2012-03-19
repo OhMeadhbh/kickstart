@@ -34,7 +34,7 @@
     		password: {
     			count: 1024,
     	    	salt: 'zpAtI1MlHUM=',
-    	    	secret: 'SGLe9dKeiHFujEyVPyUZEP2n+KM='
+			secret: 'FudmjBs+B5a/2IlK2UKbGOM4YwU='
     		}
     	}
     };

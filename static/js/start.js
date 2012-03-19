@@ -1,9 +1,10 @@
 var webid;
 
 $(document).ready( function ( ) {
+
 	new home( [
 		   'email_local', 'password_local', 'name_provision',
-		   'email_provision', 'password_provision'
+		   'email_provision', 'password_provision_1', 'password_provision_2'
 		   ],
 		  [
 		   'login_local', 'recovery_local', 'twitter_social',
@@ -28,6 +29,8 @@ $(document).ready( function ( ) {
 } ) ();
 
 ( function () {
+    var timer;
+
     function home ( inputs, buttons ) {
 	for( var i = 0, il = inputs.length; i < il; i++ ) {
 	    var item = inputs[i];
@@ -70,61 +73,87 @@ $(document).ready( function ( ) {
 		setCookie( 'webid', data.webid, 30 );
 		location.href = '/app';
 	    } else {
-		_raise_alert( '(application error) ' + _error( data ) );
+		_raise_alert( 'error', _error( data ) );
 	    }
 	}
 
 	function error ( jqXHR, textStatus, errorThrown ) {
-	    console.log( 'error' );
-	    _raise_alert( '(' + textStatus + ') ' + errorThrown );
+	    _raise_alert( 'error', '(' + textStatus + ') ' + errorThrown );
 	}
     };
 
     home.prototype.recovery_local = function () {
-	console.log( 'home.prototype.recovery_local' );
+	_raise_alert( 'success', 'A password recovery link has been emailed to your account.' );
     };
+
     home.prototype.twitter_social = function () {
 	location.href = "/api/login.twitter";
     };
+
     home.prototype.facebook_social = function () {
 	console.log( 'home.prototype.facebook_social' );
     };
 
     home.prototype.signup_provision = function () {
-	console.log( 'home.prototype.signup_provision' );
+	if( this.name_provision.val() && this.email_provision.val() &&
+	    this.password_provision_1.val() && this.password_provision_2.val() ) {
+	    if( this.password_provision_1.val() !== this.password_provision_2.val() ) {
+		console.log( 'passwords dont match' );
+		return _raise_alert( 'error', 'Both password fields must match.' );
+	    }
+	} else {
+	    console.log( 'you didnt fill in all the fields' );
+	    return _raise_alert( 'error', 'You must fill in all fields: Full Name, Email and both Password fields.' );
+	}
+
 	$.ajax({
 	    url: '/api/provision.local',
-		    async: true,
+            async: true,
 	    contentType: 'application/json',
 	    data: JSON.stringify( {
-	    	name: this.name_provision.val(),
+	        name: this.name_provision.val(),
 	        email: this.email_provision.val(),
-	        passwd: this.password_provision.val() } ),
+	        passwd: this.password_provision_1.val() } ),
 	    dataType: 'json',
 	    type: 'POST',
 	    success: success,
-		    error: error,
-		    headers: {'X-webid': webid.uuid }
+	    error: error,
+	    headers: {'X-webid': webid.uuid }
 	});
 
-		function success (data, textStatus, jqXHR ) {
-	    	if( data && data.success ) {
-	    		location.href = '/mail/signup';
-	    	} else {
-	    		_raise_alert( '(application error) ' + _error( data ) );
-	    	}
-		}
+	function success (data, textStatus, jqXHR ) {
+	    console.log( 'success' );
+	    console.log( data );
+	    if( data && data.success ) {
+		location.href = '/mail/signup';
+	    } else {
+		_raise_alert( 'error', '(application error) ' + _error( data ) );
+	    }
+	}
 
 	function error ( jqXHR, textStatus, errorThrown ) {
 	    console.log( 'error' );
-	    _raise_alert( '(' + textStatus + ') ' + errorThrown );
+	    console.log( textStatus );
+	    console.log( errorThrown );
+	    _raise_alert( 'error', '(' + textStatus + ') ' + errorThrown );
 	}
 
     };
 
-    //todo: add proper error handling w/ alerts and so forth
-    function _raise_alert( message ) {
-	console.log( message );
+    function _raise_alert( type, message ) {
+	var text = '<div class="fade in alert alert-' + type + '"><a class="close" data-dismiss="alert">&times;</a><strong>' + type.toUpperCase() + '!</strong> ' + message + '</div>';
+
+	if( timer ) {
+	    clearTimeout( timer );
+	    $('.close').trigger('click');
+	} 
+
+	$('.front-alert-area').html( text );
+
+	timer = setTimeout( function () {
+	    $('.close').trigger('click');
+	    timer = null;
+	}, 7000 );
     }
 
     function _error( data ) {

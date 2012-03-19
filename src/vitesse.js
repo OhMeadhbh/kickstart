@@ -52,11 +52,13 @@
     		log( "initializing server" );
     		that.app = express.createServer();
     		var app = that.app;
+		var format;
 
     		defaults.publicUrl && ( publicUrl = defaults.publicUrl );
     		defaults.errorHandler && app.use( express.errorHandler( defaults.errorHandler ) );
     		defaults.faviconPath && app.use( express.favicon( defaults.faviconPath ) );
-    		defaults.logPath && app.use( express.logger( {stream: fs.createWriteStream( defaults.logPath )} ) );
+	        defaults.logFormat && (format = defaults.logFormat);
+    		defaults.logPath && app.use( express.logger( {stream: fs.createWriteStream( defaults.logPath,{flags:'a',encoding:'utf-8',mode:0644} ), format: format} ) );
     		defaults.staticPath && app.use( express.static( defaults.staticPath ) );
     		app.use( express.cookieParser() );
     		app.use( express.bodyParser() );
@@ -99,7 +101,8 @@
    			'/about/tou' : {template: 'about_tou'},
    			'/about/privacy' : { template: 'about_privacy'},
    			'/app' : {template: 'app', layout: 'applayout'},
-   			'/test' : {template: 'test' }
+   			'/test' : {template: 'test' },
+   			'/test2' : {template: 'test2' }
     	};
 
     	function stockHandler ( info ) {
@@ -226,7 +229,7 @@
     		var url = defaults.publicUrl + 'mail/' + email_id; 
     		
     		var message_body = '<html><body><p>You, or someone impersonating you, recently signed up for an account at ' +
-    			'<a href="' + defaults.publicUrl + '">' + defaults.site.title + '</a>. ' +
+    			'<a href="' + defaults.publicUrl + '">Kickstart</a>. ' +
     			'To verify your account, click on this link:</p>' +
     			'<p><blockquote><a href="' + url + '">' + url + '</a></blockquote></p>' +
     			'<p>If you didn\'t sign up for this account, simply ignore this message and the sign-up request will time out.</p>' +
