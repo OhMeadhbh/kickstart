@@ -70,7 +70,7 @@ $(document).ready( function ( ) {
 	function success (data, textStatus, jqXHR ) {
 	    console.log( data );
 	    if( data && data.success ) {
-		setCookie( 'webid', data.webid, 30 );
+		_cookie( 'webid', data.webid, false );
 		location.href = '/app';
 	    } else {
 		_raise_alert( 'error', _error( data ) );
@@ -125,7 +125,7 @@ $(document).ready( function ( ) {
 	    console.log( 'success' );
 	    console.log( data );
 	    if( data && data.success ) {
-		location.href = '/mail/signup';
+		reveal_signup_modal();
 	    } else {
 		_raise_alert( 'error', '(application error) ' + _error( data ) );
 	    }
@@ -138,6 +138,9 @@ $(document).ready( function ( ) {
 	    _raise_alert( 'error', '(' + textStatus + ') ' + errorThrown );
 	}
 
+	function reveal_signup_modal () {
+	    $('#provision_modal').modal();
+	}
     };
 
     function _raise_alert( type, message ) {
@@ -174,11 +177,15 @@ $(document).ready( function ( ) {
 	return( text );
     }
 
-    function setCookie(c_name,value,exdays) {
-	var exdate=new Date();
-	exdate.setDate(exdate.getDate() + exdays);
-	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-	document.cookie=c_name + "=" + c_value;
+    function _cookie(name,value,persist) {
+	var cookie_string = encodeURIComponent(name) + '=' + encodeURIComponent(value) + "; path=/; domain=kickstart.meadhbh.org";
+	
+	if( persist ) {
+	    var now = Date.now();
+	    cookie_string += "; expires=" + (new Date((Date.now() + 86400000))).toUTCString();
+	}
+	document.cookie=cookie_string;
     }
+
 })();
 

@@ -161,6 +161,10 @@
 	    safe( 'no tos' );
 	}
     };
+
+    dao.prototype.dumpEmailIds = function () {
+    	console.log( email_ids );
+    };
     
     dao.prototype.dumpTwitterIds = function () {
     	console.log( twitter_ids );

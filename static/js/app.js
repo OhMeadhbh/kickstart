@@ -57,7 +57,19 @@ $(document).ready( function () {
     }
 
     App.prototype.logout = function () {
-	document.cookie = "webid=";
+	_cookie( 'webid', '', false );
 	location.href = "/";
     };
+
+    function _cookie(name,value,persist) {
+	var cookie_string = encodeURIComponent(name) + '=' + encodeURIComponent(value) + "; path=/; domain=kickstart.meadhbh.org";
+
+	if( persist ) {
+	    var now = Date.now();
+	    cookie_string += "; expires=" + (new Date((Date.now() + 86400000))).toUTCString();
+	}
+
+	document.cookie=cookie_string;
+    }
+
 } ) ();

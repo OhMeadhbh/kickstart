@@ -100,9 +100,7 @@
    			'/about/javascript' : {template: 'about_javascript'},
    			'/about/tou' : {template: 'about_tou'},
    			'/about/privacy' : { template: 'about_privacy'},
-   			'/app' : {template: 'app', layout: 'applayout'},
-   			'/test' : {template: 'test' },
-   			'/test2' : {template: 'test2' }
+   			'/app' : {template: 'app', layout: 'applayout'}
     	};
 
     	function stockHandler ( info ) {
@@ -130,16 +128,18 @@
     	}
     	
     	app.get( '/mail/:id', function( request, response ) {
-    		dao.getSiteInfo( function ( err, data ) {
-    			var template_data = {
-					title: data.title,
-					subtitle: data.subtitle,
-					copy: data.copy,
-					session: request.cookies[ 'webid' ],
-					mailid: request.params.id
-				};
-    			response.render( 'mail', template_data );
-    		} );
+    		dao.getSiteInfo( getMailQueueItem );
+
+		function getMailQueueItem ( err, data ) {
+		    var template_data = {
+			title: data.title,
+			subtitle: data.subtitle,
+			copy: data.copy,
+			session: request.cookies[ 'webid' ],
+			mailid: request.params.id
+		    };
+		    response.render( 'mail', template_data );
+		}
     	} );
     };
 
@@ -148,6 +148,7 @@
     	app.get( '/api/login.twitter', login_twitter );
     	app.get( '/api/callback.twitter', callback_twitter );
     	app.post( '/api/provision.local', provision_local );
+    	app.post( '/api/provision.complete', provision_complete );
     	app.post( '/api/logout', logout );
     	app.get( '/api/seed/:id', seed );
     };
@@ -209,7 +210,8 @@
     			email: request.body.email,
     			passwd: request.body.passwd,
     			name: request.body.name,
-    			type: 'provision'
+    			type: 'provision',
+			expires: (Date.now() + 86400000)
     		};
     		
     		dao.createMailQueue( mq_item, post_create_mq );
@@ -250,6 +252,90 @@
     			_complete( response, {success: true } );
     		}
     	}
+    }
+
+    function provision_complete ( request, response ) {
+	var response_object = {
+	    success: false,
+	    error: 'Provisioning ID invalid or expired'
+	};
+	var request_data;
+	var user;
+	var identity;
+	var webid;
+
+	if( request.body.mailid ) {
+	    return dao.getMailQueue( request.body.mailid, check_queue_item );
+	} else {
+	    return _complete( response, response_object );
+	}
+
+	function check_queue_item( err, data ) {
+	    if( err ) {
+		return _complete( response, {success:false, error: err.toString()} );
+	    } else {
+		request_data = data;
+		if( data.expires >= Date.now() ) {
+		    return generator.generate( post_generate );
+		} else {
+		    return _complete( response, response_object );
+		}
+	    }
+	}
+
+	function post_generate( uuid ) {
+	    user = {
+		id: uuid.toString(),
+		name: request_data.name,
+		email_ids: [ request_data.email ]
+	    };
+
+	    (new password( {password: request_data.passwd, count: 2000} )).generateSecret( post_password );
+	}
+
+	function post_password( err, data ) {
+	    if( err ) {
+		return _complete( response, {success:false,error:err.toString()});
+	    } else {
+		delete data.password;
+		identity = {
+		    id: request_data.email,
+		    user: user.id,
+		    name: request_data.name,
+		    password: data
+		};
+		return dao.createEmailIdentity( identity, post_identity );
+	    }
+	}
+
+	function post_identity ( err, data ) {
+	    if( err ) {
+		return _complete( response, {success:false,error:err.toString()});
+	    } else {
+		return dao.createUser( user, post_user );
+	    }
+	}
+
+	function post_user ( err, data ) {
+	    if( err ) {
+		return _complete( response, {success:false,error:err.toString()});
+	    } else {
+		generator.generate( generate_session );
+	    }
+	}
+
+	function generate_session( uuid ) {
+	    webid = uuid.toString();
+	    dao.createSession( {id: webid, user: user.id}, post_session );
+	}
+
+	function post_session( err, data ) {
+	    if( err ) {
+		return _complete( response, {success:false,error:err.toString()});
+	    } else {
+		return _complete( response, {success:true, webid:webid} );
+	    }
+	}
     }
     
     function callback_twitter ( request, response ) {

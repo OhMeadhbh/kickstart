@@ -1,29 +1,33 @@
 {
-  "publicUrl": "http://sl8.us:2112/",
+  "publicUrl": "http://angelina.l.nodify.us/",
   "errorHandler": {
     "dumpExceptions": true,
     "showStack": true
   },
   "faviconPath": "static/favicon.ico",
-  "compiler": {
-    "enable": [ "less" ],
-    "src": "/home/msh/Projects/bootstrap-play/less",
-    "dest": "/home/msh/Projects/bootstrap-play/static"
-  },
-  "logPath": "access_log",
+  "logPath": "access_log.csv",
+  "logFormat": "\":date\",\":req[x-forwarded-for]\",:status,:method,\":url\",\":referrer\",\":user-agent\"",
   "staticPath": "static",
   "views": {
     "path": "views",
     "engine": "hbs"
   },
   "listen": {
-    "port": 2112,
-    "host": "sl8.us"
+    "port": 9200,
+    "host": "127.0.0.1"
   },
-  "site": {
-    "info": "/api/site.info",
-    "title": "Kickstart",
-    "subtitle": "Because It Sux To Do The Same Thing Over And Over",
-    "copy": "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved"
+  "twitter": {
+    "consumer_key": "",
+    "consumer_secret": "",
+    "request_token_url": "https://api.twitter.com/oauth/request_token",
+    "authorize_url": "https://api.twitter.com/oauth/authorize",
+    "access_token_url": "https://api.twitter.com/oauth/access_token",
+    "version": "1.0A",
+    "callback_url": "http://angelina.app.nodify.us/api/callback.twitter",
+    "mac_algo": "HMAC-SHA1"
+  },
+  "email": {
+    "server": {"host":"127.0.0.1"},
+    "headers": {"from": "Do Not Reply <do-not-reply@angelina.app.nodify.us>"}
   }
 }
