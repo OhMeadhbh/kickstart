@@ -59,8 +59,8 @@ function exercise_db () {
 
  	log( "dao.siteInfoRead() success" );
 
-	assert.equal( results.title, 'kickstart' );
-	assert.equal( results.subtitle, 'making node easier' );
+	assert.equal( typeof results.title, 'string' );
+	assert.equal( typeof results.subtitle, 'string' );
 	assert.equal( typeof results.copyright, 'string' );
 	assert.equal( typeof results.tos, 'string' );
 
@@ -95,7 +95,7 @@ function read_siteInfo_again () {
 	log( "dao.siteInfoRead() success" );
 
 	assert.equal( results.title, 'i am the new title' );
-	assert.equal( results.subtitle, 'making node easier' );
+	assert.equal( typeof results.subtitle, 'string' );
 	assert.equal( typeof results.copyright, 'string' );
 	assert.equal( typeof results.tos, 'string' );
 
@@ -117,8 +117,6 @@ function lookup_by_email () {
 
 	log( "dao.emailIdentityReadByAddress() success" );
 
-	console.log( results[0].user );
-
 	get_user( results[0].user );
     } )
 }
@@ -132,8 +130,6 @@ function get_user ( uuid ) {
 
 	log( "dao.emailRead() success" );
 
-	console.log( results );
-	
 	dao.close( _closed );
     } );
 }
