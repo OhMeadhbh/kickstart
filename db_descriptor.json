@@ -1,0 +1,128 @@
+{
+  "session":{
+    "items":{
+      "uuid":"VARCHAR(36)",
+      "user":"VARCHAR(36)",
+      "oauth_token": "VARCHAR(80)",
+      "oauth_token_secret": "VARCHAR(80)",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+      "expires": "TIMESTAMP"
+    },
+    "key":"uuid",
+    "select":{"user":"user"}
+  },
+  "user":{
+    "items":{
+      "uuid":"VARCHAR(36)",
+      "name":"VARCHAR(80)",
+      "profileUrl":"VARCHAR(320)",
+      "utcOffset":"INT",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+      "tosAccepted": "TIMESTAMP DEFAULT '1970-01-01 00:00:00'"
+    },
+    "key":"uuid",
+    "insert":[
+      {
+        "uuid":"faf60e8d-26e6-4469-8467-e42276cde9b8",
+        "name":"Meadhbh S. Hamrick",
+        "profileUrl":"http://a0.twimg.com/profile_images/1909932608/6b1db7ad-58eb-4079-adce-45c44b917162_normal.png",
+        "utcOffset":-28800
+      }
+    ]
+  },
+  "twitterIdentity":{
+    "items":{
+      "user":"VARCHAR(36)",
+      "name":"VARCHAR(80)",
+      "screenName":"VARCHAR(80)",
+      "twitterUserId":"INT",
+      "profileUrl":"VARCHAR(320)",
+      "oauthAccessToken":"VARCHAR(80)",
+      "oauthAccessTokenSecret":"VARCHAR(80)",
+      "utcOffset":"INT",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+    },
+    "key":"screenName",
+    "select":{"user":"user", "screenName":"twitterIdentity"},
+    "insert":[
+      {
+        "user":"faf60e8d-26e6-4469-8467-e42276cde9b8",
+        "name":"Meadhbh Hamrick",
+        "screenName":"OhMeadhbh",
+        "twitterUserId":112524101,
+        "profileUrl":"http://a0.twimg.com/profile_images/1909932608/6b1db7ad-58eb-4079-adce-45c44b917162_normal.png",
+        "utcOffset":-28800
+      }
+    ]
+  },
+  "emailIdentity":{
+    "items":{
+      "address":"VARCHAR(320)",
+      "user":"VARCHAR(36)",
+      "name":"VARCHAR(80)",
+      "salt":"VARCHAR(12)",
+      "count":"INT",
+      "secret":"VARCHAR(28)",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+    },
+    "key":"address",
+    "select":{"user":"user", "address": "emailIdentity"},
+    "insert":[
+      {
+        "address":"OhMeadhbh@gmail.com",
+        "user":"faf60e8d-26e6-4469-8467-e42276cde9b8",
+        "name":"Meadhbh S. Hamrick",
+        "salt":"zpAtI1MlHUM=",
+        "count":1024,
+        "secret":"SGLe9dKeiHFujEyVPyUZEP2n+KM="
+      }
+    ]
+  },
+  "mailQueue":{
+    "items":{
+      "uuid":"VARCHAR(36)",
+      "user":"VARCHAR(36)",
+      "email":"VARCHAR(80)",
+      "passwd":"VARCHAR(80)",
+      "name":"VARCHAR(80)",
+      "type":"VARCHAR(20)",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+      "expires": "TIMESTAMP"
+    },
+    "key":"uuid",
+    "select":{"user":"user"}
+  },
+  "siteInfo": {
+    "items": {
+      "title": "VARCHAR(80)",
+      "subtitle": "VARCHAR(80)",
+      "copyright": "VARCHAR(160)",
+      "tos": "VARCHAR(36)",
+      "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+    },
+    "select": {"tos": "siteInfo"},
+    "insert": [
+      {
+        "title": "angelina",
+	"subtitle": "demo apps on the cognitive frontier",
+	"copyright": "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved.",
+	"tos": "14539134-4199-41e6-b8a0-a06e38e77f2b"
+      }
+    ]
+  },
+  "tos": {
+    "items": {
+      "uuid": "VARCHAR(36)",
+      "validFrom": "DATETIME DEFAULT '1970-01-01 00:00:00'",
+      "url": "VARCHAR(80)"
+     },
+     "key": "uuid",
+     "insert": [
+       {
+         "uuid": "14539134-4199-41e6-b8a0-a06e38e77f2b",
+         "validFrom": "2012-01-01 00:00:00",
+         "url": "/tos/14539134-4199-41e6-b8a0-a06e38e77f2b"
+       }
+     ]
+  }
+}

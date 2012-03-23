@@ -1,6 +1,6 @@
 # Makefile
 
-MODULES = node-props node-mug less hbs express emailjs oauth
+MODULES = node-props node-mug less hbs express emailjs oauth mysql
 
 BUILDS = ./build/bootstrap
 

@@ -24,9 +24,23 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-	  <a class="brand" href="{{#if session}}/app#{{else}}/start{{/if}}">kickstart</a>
+	  <a class="brand" href="{{#if session}}/app#{{else}}/start{{/if}}">{{title}}</a>
 	  <ul class="nav pull-right">
 	    <li><a href="/about">about this site</a></li>
+	    {{#if session}}
+	    <li class="divider-vertical"></li>
+	    <li class="dropdown" id="menu1">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1" id="dropdown">
+		<img class="nav-img" src="{{userinfo.profileUrl}}"/>
+	        {{userinfo.name}}
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+	        <li><a href="/app#settings/profile">Settings</a></li>
+		<li class="divider"></li>
+		<li><a href="/app#logout/logout" onclick="logout()">log out</a></li>
+	      </ul>
+	    </li>{{/if}}
 	  </ul>
         </div>
       </div>

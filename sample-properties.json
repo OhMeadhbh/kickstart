@@ -1,5 +1,5 @@
 {
-  "publicUrl": "http://angelina.l.nodify.us/",
+  "publicUrl": "http://angelina.app.nodify.us/",
   "errorHandler": {
     "dumpExceptions": true,
     "showStack": true
@@ -29,5 +29,12 @@
   "email": {
     "server": {"host":"127.0.0.1"},
     "headers": {"from": "Do Not Reply <do-not-reply@angelina.app.nodify.us>"}
+  },
+  "persistence": {
+  	"host": "localhost",
+  	"user": "angelina",
+  	"pass": "",
+  	"db": "angelina",
+  	"descriptorPath": "db_descriptor.json"
   }
 }

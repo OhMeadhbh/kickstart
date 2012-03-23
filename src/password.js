@@ -41,7 +41,7 @@
 	
 	password.prototype.generateSecret = function ( complete ) {
 		var that = this;
-		
+
 		if( this.password && this.count ) {
 			if( this.salt ) {
 				return _generate_secret.apply( this, [ new Buffer( this.salt, 'base64'), complete ] );
@@ -68,7 +68,7 @@
 				password: this.password,
 				count: this.count,
 			};
-			return _generate_secret.apply( trial, [ new Buffer( this.salt, 'base64' ), check ] );
+			return _generate_secret.apply( trial, [ new Buffer( that.salt, 'base64' ), check ] );
 		} else {
 			return complete( 'missing parameters( password, count, salt or secret )', null );
 		}

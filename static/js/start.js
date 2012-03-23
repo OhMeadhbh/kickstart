@@ -53,8 +53,7 @@ $(document).ready( function ( ) {
     home.prototype.login_local = function () {
 	$.ajax({
 	    url: '/api/login.local',
-		    cache: false,
-		    async: true,
+	    async: true,
 	    contentType: 'application/json',
 	    data: JSON.stringify( {
 	        email: this.email_local.val(),
@@ -62,15 +61,14 @@ $(document).ready( function ( ) {
 	    dataType: 'json',
 	    type: 'POST',
 	    success: success,
-		    error: error,
-		    timeout: 10000,
-		    headers: {'X-webid': webid.uuid }
+	    error: error,
+	    timeout: 10000,
+	    headers: {'X-webid': webid.uuid }
 	});
 
 	function success (data, textStatus, jqXHR ) {
-	    console.log( data );
 	    if( data && data.success ) {
-		_cookie( 'webid', data.webid, false );
+		_cookie( 'webid', data.webid, data.expires );
 		location.href = '/app';
 	    } else {
 		_raise_alert( 'error', _error( data ) );
@@ -98,11 +96,9 @@ $(document).ready( function ( ) {
 	if( this.name_provision.val() && this.email_provision.val() &&
 	    this.password_provision_1.val() && this.password_provision_2.val() ) {
 	    if( this.password_provision_1.val() !== this.password_provision_2.val() ) {
-		console.log( 'passwords dont match' );
 		return _raise_alert( 'error', 'Both password fields must match.' );
 	    }
 	} else {
-	    console.log( 'you didnt fill in all the fields' );
 	    return _raise_alert( 'error', 'You must fill in all fields: Full Name, Email and both Password fields.' );
 	}
 
@@ -122,8 +118,6 @@ $(document).ready( function ( ) {
 	});
 
 	function success (data, textStatus, jqXHR ) {
-	    console.log( 'success' );
-	    console.log( data );
 	    if( data && data.success ) {
 		reveal_signup_modal();
 	    } else {
@@ -132,9 +126,6 @@ $(document).ready( function ( ) {
 	}
 
 	function error ( jqXHR, textStatus, errorThrown ) {
-	    console.log( 'error' );
-	    console.log( textStatus );
-	    console.log( errorThrown );
 	    _raise_alert( 'error', '(' + textStatus + ') ' + errorThrown );
 	}
 
@@ -177,13 +168,13 @@ $(document).ready( function ( ) {
 	return( text );
     }
 
-    function _cookie(name,value,persist) {
-	var cookie_string = encodeURIComponent(name) + '=' + encodeURIComponent(value) + "; path=/; domain=kickstart.meadhbh.org";
-	
-	if( persist ) {
-	    var now = Date.now();
-	    cookie_string += "; expires=" + (new Date((Date.now() + 86400000))).toUTCString();
+    function _cookie(name,value,expiration) {
+	var cookie_string = encodeURIComponent(name) + '=' + encodeURIComponent(value) + "; path=/";
+
+	if( expiration ) {
+	    cookie_string += "; expires=" + (new Date(expiration)).toUTCString();
 	}
+
 	document.cookie=cookie_string;
     }
 

@@ -13,8 +13,8 @@
 
     var site_info = {
     	login: "/api/login.local",
-    	title: "kickstart",
-    	subtitle: "'cause it sux to keep doing the same thing over and over",
+    	title: "angelina",
+    	subtitle: "prototyping web apps on the cognitive frontier",
     	copy: "Copyright &copy; 2011-2012 Meadhbh S. Hamrick, All Rights Reserved"
     };
 
