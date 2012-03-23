@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<templates>
+  <template id="settings/profile">
+    <p>welcome to the settings page for {{whatever}}</p>
+  </template>
+</templates>
