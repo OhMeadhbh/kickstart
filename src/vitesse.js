@@ -87,7 +87,8 @@
    	    '/about/tou' : {template: 'about_tou'},
    	    '/about/privacy' : { template: 'about_privacy'},
    	    '/app' : {template: 'app'},
-   	    '/mail/:mailid' : {template: 'mail'}
+   	    '/mail/:mailid' : {template: 'mail'},
+	    '/geotest': {template: 'geotest'}
     	};
 
     	function stockHandler ( info ) {
@@ -130,20 +131,17 @@
 		}
 		
 		function completeRequest( user ) {
-		    log( 'got data for user ' + user.uuid );
-		    console.log( user );
-
 		    request.userinfo = user;
 
     		    var template_data = {
     			title: siteInfo.title,
     			subtitle: siteInfo.subtitle,
-    			copy: siteInfo.copy,
+    			copy: siteInfo.copyright,
     			session: request.cookies[ 'webid' ],
     			mailid: request.params.mailid,
 			userinfo: user
     		    };
-    		    
+
     		    if( info.layout ) {
     			template_data.layout = info.layout;
     		    }
