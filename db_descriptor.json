@@ -18,7 +18,7 @@
       "profileUrl":"VARCHAR(320)",
       "utcOffset":"INT",
       "updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
-      "tosAccepted": "TIMESTAMP DEFAULT '1970-01-01 00:00:00'"
+      "tosAccepted": "TIMESTAMP DEFAULT '1970-01-01 00:00:01'"
     },
     "key":"uuid",
     "insert":[

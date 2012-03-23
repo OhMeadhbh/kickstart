@@ -26,31 +26,31 @@
     }
 
     dao_mysql.prototype.init = function ( complete ) {
-    	var that = this;
-
+	var that = this;
     	this.descriptor = JSON.parse ( fs.readFileSync( this.descriptorPath, 'utf-8' ) );
 
     	this.client = mysql.createClient( {
-    	    host: that.host,
-    	    user: that.user,
-    	    password: that.pass
+    	    host: this.host,
+    	    user: this.user,
+    	    password: this.pass
     	} );
 
-    	this.client.useDatabase( that.db, function ( err ) {
-    	    if( err ) {
-    		complete( err.toString(), null );
-    	    } else {
-    		read_database.apply( that, [ that.descriptor ] );
-    	    }
-    	} );	
+	if( this.populate ) {
+	    return deleteExistingDatabase.apply( this, [this.descriptor ] );
+	} else {
+	    return read_database.apply( this, [ this.descriptor ] );
+	}
+
+	function deleteExistingDatabase( d ) {
+	    this.client.useDatabase( 'mysql', function( err, data ) {
+	        that.client.query( 'DROP DATABASE IF EXISTS ' + that.db );
+    		that.client.query( 'CREATE DATABASE ' + that.db );
+		read_database.apply( that, [d] );
+	    } );
+	}
 
     	function read_database ( d ) {
-	    if( this.populate ) {
-    		this.client.query( 'DROP DATABASE IF EXISTS ' + this.db );
-    		this.client.query( 'CREATE DATABASE ' + this.db );
-	    }
-
-    	    this.client.query( 'USE ' + this.db );
+    	    this.client.useDatabase( this.db );
 
     	    for( var item in d ) {
     		var current = d[ item ];
@@ -63,7 +63,7 @@
 		}
     	    }
 
-    	    complete( null, that );
+    	    complete( null, this );
     	}
 
     	function _populate_keys ( fields ) {
